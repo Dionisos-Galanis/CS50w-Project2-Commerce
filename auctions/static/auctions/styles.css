@@ -1,0 +1,71 @@
+:root {
+    --sidePic: 150px;
+    --lstDivPad: 10px;
+    --bigImgH: 400px;
+    --bigImgW: 400px;
+    --heartSize: 30px;
+}
+
+body {
+    padding: 10px;
+}
+
+.indLstDiv {
+    border-style: groove;
+    border-color:rgb(250, 250, 250);
+    height: calc(var(--sidePic) + 2 * var(--lstDivPad));
+    padding: var(--lstDivPad);
+
+}
+
+.indLstImg {
+    float: left;
+    width: var(--sidePic);
+    height: var(--sidePic);   
+    margin-right: 50px;
+}
+
+/* .indLstTitDiv {
+
+} */
+
+.bigImg {
+    max-height: var(--bigImgH);
+    max-width: var(--bigImgW);
+    float: right;
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+.greentext {
+    color: green;
+}
+
+.favHeart {
+    height: var(--heartSize);
+    width: var(--heartSize);
+}
+
+.spanHead {
+    display: inline;
+    margin-right: 20px;
+}
+
+#formNCtext {
+    margin-top: 30px;
+}
+
+.comDateT {
+    font-size: smaller;
+    color: darkslategray;
+}
+
+#indMainInf {
+    float: left;
+    width: 30%;
+}
+
+#indLstDesc {
+    float: left;
+    margin-left: 20px;
+}

@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for lst in actlst %}
+
+        <a href="review/{{ lst.pk }}">
+
+            <div class="indLstDiv">
+
+                {% if not lst.image == Null %}
+                    <img class="indLstImg" src="{{ lst.image }}">
+                {% else %}
+                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
+                {% endif %}
+
+                <div id="indMainInf">
+
+                    <div class="indLstTitDiv">
+                        {% if lst.name|length > lTitMax %}
+                            <h2>{{ lst.name|truncatechars:lTitMax }}</h2>
+                        {% else %}
+                            <h2>{{ lst.name }}</h2>
+                        {% endif %}
+                    </div>
+
+                    <div class="indLstPriceDiv">
+                        <h3>${{ lst.curprice }}</h3>
+                    </div>
+
+                    <div class="indLstCrDTDiv">
+                        <p>Created: {{ lst.createdatettime }}</p>
+                    </div>
+
+                    {% if not lst.category == Null %}
+                        <div class="indLstCatDiv">
+                            <p>Category: {{ lst.category }}</p>
+                        </div>
+                    {% else %}
+                        <div class="indLstCatDiv">
+                            <p>Category: Not selected</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div id="indLstDesc">
+                    {% if lst.description|length > lDescMax %}
+                    <p>{{ lst.description|truncatechars:lDescMax }}</p>
+                    {% else %}
+                    <p>{{ lst.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </a>
+
+    {% empty %}
+
+        <h5>No listings here :-(</h5>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if listType == "WatchList" %}
+        <h2>Watchlist</h2>
+    {% elif listType == "MyListings" %}
+        <h2>My Listings</h2>
+    {% endif %}
+
+    <h3>Active:</h3>
+
+    {% for lst in actListings %}
+
+        <a href="/review/{{ lst.pk }}">
+
+            <div class="indLstDiv">
+
+                {% if not lst.image == Null %}
+                    <img class="indLstImg" src="{{ lst.image }}">
+                {% else %}
+                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
+                {% endif %}
+
+                <div class="indLstTitDiv">
+                    <h2>{{ lst.name }}</h2>
+                </div>
+
+                <div class="indLstPriceDiv">
+                    <h3>${{ lst.curprice }}</h3>
+                </div>
+
+                <div class="indLstCrDTDiv">
+                    <p>Created: {{ lst.createdatettime }}</p>
+                </div>
+
+                {% if not lst.category == Null %}
+                    <div class="indLstCatDiv">
+                        <p>Category: {{ lst.category }}</p>
+                    </div>
+                {% else %}
+                    <div class="indLstCatDiv">
+                        <p>Category: Not selected</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </a>
+
+    {% empty %}
+
+        <h5>No listings here ...</h5>
+    
+    {% endfor %}
+
+    <h3>Closed:</h3>
+
+    {% for lst in closedListings %}
+
+        <a href="/review/{{ lst.pk }}">
+
+            <div class="indLstDiv">
+
+                {% if not lst.image == Null %}
+                    <img class="indLstImg" src="{{ lst.image }}">
+                {% else %}
+                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
+                {% endif %}
+
+                <div class="indLstTitDiv">
+                    <h2>{{ lst.name }}</h2>
+                </div>
+
+                <div class="indLstPriceDiv">
+                    <h3>${{ lst.curprice }}</h3>
+                </div>
+
+                <div class="indLstCrDTDiv">
+                    <p>Created: {{ lst.createdatettime }}</p>
+                </div>
+
+                {% if not lst.category == Null %}
+                    <div class="indLstCatDiv">
+                        <p>Category: {{ lst.category }}</p>
+                    </div>
+                {% else %}
+                    <div class="indLstCatDiv">
+                        <p>Category: Not selected</p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </a>
+
+    {% empty %}
+
+        <h5>No listings here ...</h5>
+    
+    {% endfor %}
+
+{% endblock %}

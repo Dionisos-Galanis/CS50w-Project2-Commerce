@@ -1,0 +1,108 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+    <div>
+
+        {% if not lst.image == Null %}
+            <img class="bigImg" src="{{ lst.image }}">
+        {% else %}
+            <img class="bigImg" src="{% static 'auctions/defaultimage.png' %}">
+        {% endif %}
+
+        <h2 class="spanHead">{{ lst.name }}</h2>
+
+        <span> 
+            <a href="{% url 'wlswitch' lst.pk %}">
+                {% if isInWL %}
+                    <img class="favHeart" src="{% static 'auctions/filledheart.png' %}">
+                {% else %}
+                    <img class="favHeart" src="{% static 'auctions/emptyheart.png' %}">
+                {% endif %}
+            </a> 
+        </span>
+
+        <p>{{ lst.description }}</p>
+
+        <div>
+            {% if lst.active %}
+                <h4 class="spanHead">Current price: ${{ lst.curprice }}</h4>
+            {% else %}
+            <h4 class="spanHead">Final price: ${{ lst.curprice }} (closed)</h4>
+            {% endif %}
+            {% if user.is_authenticated and user == lst.owner and lst.active %}
+                <form action="{% url 'listingreview' lst.pk %}" method="post" class="spanHead">
+                    {% csrf_token %}
+                    <input type="submit" name="Close Listing" value="Close Listing">
+                </form>
+            {% endif %}
+        </div>
+
+        {% if lst.active %}
+
+            <span><p>{{ nBids }} bids so far.</p></span>
+
+            {% if user.is_authenticated and user == lst.curbid.bidder %}
+                <span class="greentext">Your bid is the current bid!</span>
+            {% endif %}
+
+        {% elif user.is_authenticated and user == lst.curbid.bidder %}
+
+            <p class="greentext">You won this listing! Congrats!</p>
+
+        {% elif user.is_authenticated and user == lst.owner %}
+
+            <p class="greentext">{{ lst.curbid.bidder.username }} won your listing! Congrats!</p>
+
+        {% endif %}
+
+        {% if lst.active and user.is_authenticated %}
+            <form action="{% url 'listingreview' lst.pk %}" method="post">
+                {% csrf_token %}
+                <span>{{ formNB }}</span>
+                <span><input type="submit" value="Place Bid" name="Place Bid"></span>
+            </form>
+        {% endif %}
+        
+
+    </div>
+    <div>
+        <h4>Details</h4>
+        <ul>
+            <li>Listed by {{ lst.owner.username }}</li>
+            {% if not lst.category == Null %}
+                <li>Category: <a href="/cat/{{ lst.category.pk }}">{{ lst.category.name }}</a></li>
+            {% else %}
+                <li>Category: No Category Listed</li>
+            {% endif %}
+        </ul>
+    </div>
+    
+    <div>
+        <h4>Comments</h4>
+
+        {% for com in comments %}
+            <div class="comDiv">
+                <h5 class="spanHead">{{ com.user.username }}</h5>
+                <span class="comDateT">{{ com.datetime }}</span>
+
+                <div class="comBody">
+                    {{ com.text }}
+                </div>
+            </div>
+        {% empty %}
+            <p>No comments yet ...</p>
+        {% endfor %}
+        
+        <form action="{% url 'listingreview' lst.pk %}" method="post">
+            {% csrf_token %}
+            <div id="formNCtext">{{ formNC.text }}</div>
+            <input type="submit" value="Add comment" name="Add comment">
+        </form>
+    </div>
+
+
+
+{% endblock %}

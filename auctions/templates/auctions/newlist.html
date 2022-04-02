@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h1>New Listing</h1>
+
+    <form action="{% url 'newlisting' %}" method="post">
+        {% csrf_token %}
+        <div class="LineFdiv">
+            <span class="labLineF"> {{ form.name.label }} </span>
+            <span>{{ form.name }}</span>
+        </div>
+        <div class="TextFdiv">
+            <div class="TextFlabel">{{ form.description.label }}</div>
+            <div>{{ form.description }}</div>
+        </div>
+        <div class="LineFdiv">
+            <span class="labLineF">{{ form.startbid.label }}</span>
+            <span>{{ form.startbid }}</span>
+        </div>
+        <div class="LineFdiv">
+            <span class="labLineF">{{ form.imgurl.label }}</span>
+            <span>{{ form.imgurl }}</span>
+        </div>
+        <div class="LineFdiv">
+            <span class="labLineF">Category: </span>
+            <span>{{ form.category }}</span>
+        </div>
+
+        <div class="submit">
+            <input type="submit" value="Add">
+        </div>
+    </form>
+
+{% endblock %}
