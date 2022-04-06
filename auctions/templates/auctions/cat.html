@@ -11,35 +11,53 @@
 
         <a href="/review/{{ lst.pk }}">
 
-            <div class="indLstDiv">
+            <div class="indLstDiv mycol-12">
 
-                {% if not lst.image == Null %}
-                    <img class="indLstImg" src="{{ lst.image }}">
-                {% else %}
-                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
-                {% endif %}
+                <div class="indLstImg mycol-2 mycol-s-4">
 
-                <div class="indLstTitDiv">
-                    <h2>{{ lst.name }}</h2>
+                    {% if not lst.image == Null %}
+                        <img style="width: 100%; height:100%;" src="{{ lst.image }}">
+                    {% else %}
+                        <img style="width: 100%; height:100%;" src="{% static 'auctions/defaultimage.png' %}">
+                    {% endif %}
+
                 </div>
 
-                <div class="indLstPriceDiv">
-                    <h3>${{ lst.curprice }}</h3>
-                </div>
+                <div id="indMainInf" class="mycol-4 mycol-s-8">
 
-                <div class="indLstCrDTDiv">
-                    <p>Created: {{ lst.createdatettime }}</p>
-                </div>
-
-                {% if not lst.category == Null %}
-                    <div class="indLstCatDiv">
-                        <p>Category: {{ lst.category }}</p>
+                    <div class="indLstTitDiv">
+                        {% if lst.name|length > lTitMax %}
+                            <h3>{{ lst.name|truncatechars:lTitMax }}</h3>
+                        {% else %}
+                            <h3>{{ lst.name }}</h3>
+                        {% endif %}
                     </div>
-                {% else %}
-                    <div class="indLstCatDiv">
-                        <p>Category: Not selected</p>
+
+                    <div class="indLstPriceDiv">
+                        <h4>${{ lst.curprice }}</h4>
                     </div>
-                {% endif %}
+
+                    <div class="indLstCrDTDiv">
+                        <p>Created: {{ lst.createdatettime }}</p>
+                    </div>
+
+                    {% if not lst.category == Null %}
+                        <div class="indLstCatDiv">
+                            <p>Category: {{ lst.category }}</p>
+                        </div>
+                    {% else %}
+                        <div class="indLstCatDiv">
+                            <p>Category: Not selected</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div id="indLstDesc" class="mycol-6 mycol-s-12">
+                    {% if lst.description|length > lDescMax %}
+                    <p>{{ lst.description|truncatechars:lDescMax }}</p>
+                    {% else %}
+                    <p>{{ lst.description }}</p>
+                    {% endif %}
+                </div>
             </div>
 
         </a>
@@ -56,35 +74,53 @@
 
         <a href="/review/{{ lst.pk }}">
 
-            <div class="indLstDiv">
+            <div class="indLstDiv mycol-12">
 
-                {% if not lst.image == Null %}
-                    <img class="indLstImg" src="{{ lst.image }}">
-                {% else %}
-                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
-                {% endif %}
+                <div class="indLstImg mycol-2 mycol-s-4">
 
-                <div class="indLstTitDiv">
-                    <h2>{{ lst.name }}</h2>
+                    {% if not lst.image == Null %}
+                        <img style="width: 100%; height:100%;" src="{{ lst.image }}">
+                    {% else %}
+                        <img style="width: 100%; height:100%;" src="{% static 'auctions/defaultimage.png' %}">
+                    {% endif %}
+
                 </div>
 
-                <div class="indLstPriceDiv">
-                    <h3>${{ lst.curprice }}</h3>
-                </div>
+                <div id="indMainInf" class="mycol-4 mycol-s-8">
 
-                <div class="indLstCrDTDiv">
-                    <p>Created: {{ lst.createdatettime }}</p>
-                </div>
-
-                {% if not lst.category == Null %}
-                    <div class="indLstCatDiv">
-                        <p>Category: {{ lst.category }}</p>
+                    <div class="indLstTitDiv">
+                        {% if lst.name|length > lTitMax %}
+                            <h3>{{ lst.name|truncatechars:lTitMax }}</h3>
+                        {% else %}
+                            <h3>{{ lst.name }}</h3>
+                        {% endif %}
                     </div>
-                {% else %}
-                    <div class="indLstCatDiv">
-                        <p>Category: Not selected</p>
+
+                    <div class="indLstPriceDiv">
+                        <h4>${{ lst.curprice }}</h4>
                     </div>
-                {% endif %}
+
+                    <div class="indLstCrDTDiv">
+                        <p>Created: {{ lst.createdatettime }}</p>
+                    </div>
+
+                    {% if not lst.category == Null %}
+                        <div class="indLstCatDiv">
+                            <p>Category: {{ lst.category }}</p>
+                        </div>
+                    {% else %}
+                        <div class="indLstCatDiv">
+                            <p>Category: Not selected</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div id="indLstDesc" class="mycol-6 mycol-s-12">
+                    {% if lst.description|length > lDescMax %}
+                    <p>{{ lst.description|truncatechars:lDescMax }}</p>
+                    {% else %}
+                    <p>{{ lst.description }}</p>
+                    {% endif %}
+                </div>
             </div>
 
         </a>

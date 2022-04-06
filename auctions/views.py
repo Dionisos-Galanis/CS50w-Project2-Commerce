@@ -49,8 +49,8 @@ def index(request):
     actlst = Listing.objects.filter(active=True)
     return render(request, "auctions/index.html",{
         "actlst": actlst,
-        "lDescMax": 100,
-        "lTitMax": 15
+        "lDescMax": 300,
+        "lTitMax": 25
     })
 
 

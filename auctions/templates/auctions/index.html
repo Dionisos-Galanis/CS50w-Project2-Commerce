@@ -6,28 +6,32 @@
 
     {% for lst in actlst %}
 
-        <a href="review/{{ lst.pk }}">
+        <a href="/review/{{ lst.pk }}">
 
-            <div class="indLstDiv">
+            <div class="indLstDiv mycol-12 mycol-s-12">
 
-                {% if not lst.image == Null %}
-                    <img class="indLstImg" src="{{ lst.image }}">
-                {% else %}
-                    <img class="indLstImg" src="{% static 'auctions/defaultimage.png' %}">
-                {% endif %}
+                <div class="indLstImg mycol-2 mycol-s-4">
 
-                <div id="indMainInf">
+                    {% if not lst.image == Null %}
+                        <img style="width: 100%; height:100%;" src="{{ lst.image }}">
+                    {% else %}
+                        <img style="width: 100%; height:100%;" src="{% static 'auctions/defaultimage.png' %}">
+                    {% endif %}
+
+                </div>
+
+                <div id="indMainInf" class="mycol-4 mycol-s-8">
 
                     <div class="indLstTitDiv">
                         {% if lst.name|length > lTitMax %}
-                            <h2>{{ lst.name|truncatechars:lTitMax }}</h2>
+                            <h3>{{ lst.name|truncatechars:lTitMax }}</h3>
                         {% else %}
-                            <h2>{{ lst.name }}</h2>
+                            <h3>{{ lst.name }}</h3>
                         {% endif %}
                     </div>
 
                     <div class="indLstPriceDiv">
-                        <h3>${{ lst.curprice }}</h3>
+                        <h4>${{ lst.curprice }}</h4>
                     </div>
 
                     <div class="indLstCrDTDiv">
@@ -44,7 +48,7 @@
                         </div>
                     {% endif %}
                 </div>
-                <div id="indLstDesc">
+                <div id="indLstDesc" class="mycol-6 mycol-s-12">
                     {% if lst.description|length > lDescMax %}
                     <p>{{ lst.description|truncatechars:lDescMax }}</p>
                     {% else %}

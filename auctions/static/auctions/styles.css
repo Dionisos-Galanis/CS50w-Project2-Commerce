@@ -1,10 +1,60 @@
 :root {
-    --sidePic: 150px;
+    /* --sidePic: 150px; */
     --lstDivPad: 10px;
     --bigImgH: 400px;
     --bigImgW: 400px;
     --heartSize: 30px;
 }
+
+* {
+    box-sizing: border-box;
+  }
+  
+/* For mobile phones: */
+[class*="mycol-"] {
+    padding: 5px;
+    width: 100%;
+  }
+  
+  @media only screen and (min-width: 600px) {
+    /* For tablets: */
+    [class*="mycol-"] {
+        float: left;
+        padding: 10px;
+    }
+    .mycol-s-1 {width: 8.33%;}
+    .mycol-s-2 {width: 16.66%;}
+    .mycol-s-3 {width: 25%;}
+    .mycol-s-4 {width: 33.33%;}
+    .mycol-s-5 {width: 41.66%;}
+    .mycol-s-6 {width: 50%;}
+    .mycol-s-7 {width: 58.33%;}
+    .mycol-s-8 {width: 66.66%;}
+    .mycol-s-9 {width: 75%;}
+    .mycol-s-10 {width: 83.33%;}
+    .mycol-s-11 {width: 91.66%;}
+    .mycol-s-12 {width: 100%;}
+  }
+  
+  @media only screen and (min-width: 768px) {
+    /* For desktop: */
+    [class*="mycol-"] {
+      padding: 15px;
+    }
+    .mycol-1 {width: 8.33%;}
+    .mycol-2 {width: 16.66%;}
+    .mycol-3 {width: 25%;}
+    .mycol-4 {width: 33.33%;}
+    .mycol-5 {width: 41.66%;}
+    .mycol-6 {width: 50%;}
+    .mycol-7 {width: 58.33%;}
+    .mycol-8 {width: 66.66%;}
+    .mycol-9 {width: 75%;}
+    .mycol-10 {width: 83.33%;}
+    .mycol-11 {width: 91.66%;}
+    .mycol-12 {width: 100%;}
+  }
+
 
 body {
     padding: 10px;
@@ -13,17 +63,17 @@ body {
 .indLstDiv {
     border-style: groove;
     border-color:rgb(250, 250, 250);
-    height: calc(var(--sidePic) + 2 * var(--lstDivPad));
-    padding: var(--lstDivPad);
-
+    /* height: calc(var(--sidePic) + 2 * var(--lstDivPad)); */
+    /* padding: var(--lstDivPad); */
+    /* min-width: 860px; */
+    overflow: hidden;
+    height: fit-content;
 }
 
-.indLstImg {
-    float: left;
+/* .indLstImg {
     width: var(--sidePic);
     height: var(--sidePic);   
-    margin-right: 50px;
-}
+} */
 
 /* .indLstTitDiv {
 
@@ -61,11 +111,10 @@ body {
 }
 
 #indMainInf {
-    float: left;
-    width: 30%;
+    overflow-x: hidden;
 }
 
 #indLstDesc {
-    float: left;
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    overflow: hidden;
 }
