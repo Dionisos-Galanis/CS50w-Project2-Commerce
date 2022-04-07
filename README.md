@@ -1,5 +1,3 @@
-### WORK IN PROGRESS !!!
-
 # CS50w-Project2-Commerce
 
 CS50w course - Project 2 - Commerce - Practicing usage of Django models and signals.
@@ -19,4 +17,4 @@ Listing Page: Clicking on a listing should take users to a page specific to that
 - **Categories**: Users should be able to visit a page that displays a list of all listing categories. Clicking on the name of any category should take the user to a page that displays all of the active listings in that category.
 - **Django Admin Interface**: Via the Django admin interface, a site administrator should be able to view, add, edit, and delete any listings, comments, and bids made on the site.
 
-## Known issues: CSS is not responsive and fails to display listings with long description correctly.
+Video demo: https://www.youtube.com/watch?v=hDh3vQ7Y4bg
