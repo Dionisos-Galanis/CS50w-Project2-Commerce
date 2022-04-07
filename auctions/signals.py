@@ -6,7 +6,26 @@ from .models import Bid, Listing
 @receiver(signals.pre_delete, sender=Bid)
 def find_last_bid(sender, instance, **kwargs):
     if instance.bidlisting.curbid == instance:
-        allListBids = Bids.objects.filter(listing=instance.listing)
-        allListBids = sorted(allListBids, key=lambda bid: bid.ammount, reverse=True)
-        lastBid = allListBids[1]
-        instance.listing.curbid = lastBid
+        allListBids = Bid.objects.filter(bidlisting=instance.bidlisting)
+        allListBids = sorted(allListBids, key=lambda bid: bid.amount, reverse=True)
+        if len(allListBids) > 1:
+            lastBid = allListBids[1]
+            
+            print('instance: --------------------------------------------')
+            print(instance)
+            print('--------------------------------------------')
+            print("allListBids: ==============================================")
+            for bid in allListBids:
+                print(bid)
+            print("==============================================")
+            print('lastBid: --------------------------------------------')
+            print(lastBid)
+            print('--------------------------------------------')
+
+            instance.bidlisting.curbid = lastBid
+            instance.bidlisting.curprice = lastBid.amount
+            instance.bidlisting.save()
+        else: # The bid being deleted was the first bid
+            instance.bidlisting.curbid = None
+            instance.bidlisting.curprice = instance.bidlisting.startbid
+            instance.bidlisting.save()

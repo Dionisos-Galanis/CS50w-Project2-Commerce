@@ -28,6 +28,7 @@ class NewLstForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(NewLstForm, self).__init__(*args, **kwargs)
         self.fields['category'].choices += [(category.pk, category.name) for category in Category.objects.all()]
+        self.fields['category'].choices[1:] = sorted(self.fields['category'].choices[1:], key=lambda a: a[1])
 
 
 
@@ -180,7 +181,7 @@ def listingreview(request, lstpk):
                         "user": request.user,
                         "formNB": NewBidForm(),
                         "formNC": NewComForm(),
-                        "nBids": nBids,
+                        "nBids": nBids + 1,
                         "isInWL": isInWL,
                         "comments": comments
                     })

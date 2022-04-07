@@ -14,15 +14,17 @@
 
         <h2 class="spanHead">{{ lst.name }}</h2>
 
-        <span> 
-            <a href="{% url 'wlswitch' lst.pk %}">
-                {% if isInWL %}
-                    <img class="favHeart" src="{% static 'auctions/filledheart.png' %}">
-                {% else %}
-                    <img class="favHeart" src="{% static 'auctions/emptyheart.png' %}">
-                {% endif %}
-            </a> 
-        </span>
+        {% if user.is_authenticated %}
+            <span> 
+                <a href="{% url 'wlswitch' lst.pk %}">
+                    {% if isInWL %}
+                        <img class="favHeart" src="{% static 'auctions/filledheart.png' %}">
+                    {% else %}
+                        <img class="favHeart" src="{% static 'auctions/emptyheart.png' %}">
+                    {% endif %}
+                </a> 
+            </span>
+        {% endif %}
 
         <p>{{ lst.description }}</p>
 
@@ -58,7 +60,7 @@
 
         {% endif %}
 
-        {% if lst.active and user.is_authenticated %}
+        {% if lst.active and user.is_authenticated and not user == lst.owner %}
             <form action="{% url 'listingreview' lst.pk %}" method="post">
                 {% csrf_token %}
                 <span>{{ formNB }}</span>
@@ -96,11 +98,13 @@
             <p>No comments yet ...</p>
         {% endfor %}
         
-        <form action="{% url 'listingreview' lst.pk %}" method="post">
-            {% csrf_token %}
-            <div id="formNCtext">{{ formNC.text }}</div>
-            <input type="submit" value="Add comment" name="Add comment">
-        </form>
+        {% if user.is_authenticated %}
+            <form action="{% url 'listingreview' lst.pk %}" method="post">
+                {% csrf_token %}
+                <div id="formNCtext">{{ formNC.text }}</div>
+                <input type="submit" value="Add comment" name="Add comment">
+            </form>
+        {% endif %}
     </div>
 
 
